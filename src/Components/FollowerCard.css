@@ -1,0 +1,45 @@
+.followerHeader {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.followerHeader img {
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.followerHeader .followerName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.followerHeader .followerName div {
+  display: flex;
+  gap: 10px;
+}
+
+.followerHeader .followerName div p {
+  font-weight: 500;
+  font-size: medium;
+}
+
+.followerHeader .followerName div .verified-badge {
+  display: flex;
+  align-items: center;
+  padding: 2px 5px;
+  font-size: 8px;
+  font-weight: 400;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+
+.followerHeader .followerName .username {
+  color: grey;
+  font-weight: 500;
+  font-size: 12px;
+}
