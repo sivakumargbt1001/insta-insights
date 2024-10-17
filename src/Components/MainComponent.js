@@ -3,14 +3,15 @@ import axios from "axios";
 import "./MainComponent.css";
 import SearchField from "./SearchField";
 import ProfileCard from "./ProfileCard";
-import Followers from "./Followers";
 import PrivateSection from "./PrivateSection";
+import PublicSection from "./PublicSection";
 
 const MainComponent = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [userData, setUserData] = useState({});
   const [searching, setSearching] = useState(false);
   const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
   const showFollowers = async () => {
     if (userData.is_private) {
@@ -23,7 +24,7 @@ const MainComponent = () => {
       params: { username_or_id_or_url: userData.username },
       headers: {
         "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "2c0dd3e342mshc34c0e9867a1fd5p156a16jsn25eebd420dd8",
+        "x-rapidapi-key": "ece343db3emshfe9c8266e51658ap157bacjsn74cc715c9430",
       },
     };
 
@@ -32,6 +33,29 @@ const MainComponent = () => {
       const { items } = response.data.data;
 
       setFollowers(items);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const showFollowing = async () => {
+    if (userData.is_private) {
+      return;
+    }
+    const options = {
+      method: "GET",
+      url: "https://instagram-scraper-api2.p.rapidapi.com/v1/following",
+      params: { username_or_id_or_url: userData.username },
+      headers: {
+        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
+        "x-rapidapi-key": "ece343db3emshfe9c8266e51658ap157bacjsn74cc715c9430",
+      },
+    };
+    try {
+      const response = await axios.request(options);
+      const { items } = response.data.data;
+      console.log(items);
+      setFollowing(items);
     } catch (err) {
       console.log(err.message);
     }
@@ -50,7 +74,7 @@ const MainComponent = () => {
         headers: {
           "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
           "x-rapidapi-key":
-            "2c0dd3e342mshc34c0e9867a1fd5p156a16jsn25eebd420dd8",
+            "ece343db3emshfe9c8266e51658ap157bacjsn74cc715c9430",
         },
       };
 
@@ -104,13 +128,17 @@ const MainComponent = () => {
         change={setSearchTerm}
         submit={handleSearch}
       />
-      <ProfileCard
-        data={userData}
-        loading={searching}
-        getFollowers={showFollowers}
-      />
-      {userData.is_private && <PrivateSection />}
-      {followers.length > 0 && <Followers followers={followers} />}
+      <ProfileCard data={userData} loading={searching} />
+      {userData?.is_private && <PrivateSection />}
+      {userData?.is_private === false && (
+        <PublicSection
+          username={userData.username}
+          followers={followers}
+          following={following}
+          getFollowers={showFollowers}
+          getFollowing={showFollowing}
+        />
+      )}
     </div>
   );
 };
