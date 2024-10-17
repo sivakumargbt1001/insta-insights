@@ -18,7 +18,7 @@
 .profileHeader img {
     height: 70px;
     width: 70px;
-    object-fit: fill;
+    object-fit: contain;
     border-radius: 50%;
     background-color: black;
 }
@@ -57,17 +57,28 @@
 
 .profileStats {
     width: 100%;
-    padding: 20px;
+    padding: 0 20px;
     display: flex;
 }
 
 .stat-item {
+    padding: 20px 0;
     width: 33%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.stat-item:first-child {
-    
+.stat-item p:first-child {
+    font-weight: 700;
+    font-size: large;
+}
+
+.stat-item p:last-child {
+    font-size: small;
+}
+
+.profileContainer .bio {
+    width: 100%;
+    font-size: 14px;
 }
