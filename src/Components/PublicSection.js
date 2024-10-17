@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PublicSection.css";
 const PublicSection = ({ data }) => {
   const [posts, setPosts] = useState([]);
   const [reels, setReels] = useState([]);
   const [active, setActive] = useState("posts");
+  useEffect(() => {
+    if (data && !data.is_private) {
+      showPosts();
+    }
+  }, [data]);
   const showPosts = async () => {
     if (data.is_private) {
       return;
@@ -62,7 +67,7 @@ const PublicSection = ({ data }) => {
     showPosts();
   };
   return (
-    <div>
+    <>
       <div className="nav-container">
         <ul className="nav">
           <li
@@ -111,7 +116,7 @@ const PublicSection = ({ data }) => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
