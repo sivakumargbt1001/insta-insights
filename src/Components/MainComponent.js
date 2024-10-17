@@ -24,7 +24,7 @@ const MainComponent = () => {
       params: { username_or_id_or_url: userData.username },
       headers: {
         "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "ece343db3emshfe9c8266e51658ap157bacjsn74cc715c9430",
+        "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
       },
     };
 
@@ -48,7 +48,7 @@ const MainComponent = () => {
       params: { username_or_id_or_url: userData.username },
       headers: {
         "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "ece343db3emshfe9c8266e51658ap157bacjsn74cc715c9430",
+        "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
       },
     };
     try {
@@ -73,8 +73,7 @@ const MainComponent = () => {
         params: { username_or_id_or_url: searchTerm },
         headers: {
           "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-          "x-rapidapi-key":
-            "ece343db3emshfe9c8266e51658ap157bacjsn74cc715c9430",
+          "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
         },
       };
 
