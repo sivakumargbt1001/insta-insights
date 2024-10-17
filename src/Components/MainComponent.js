@@ -5,12 +5,15 @@ import SearchField from "./SearchField";
 import ProfileCard from "./ProfileCard";
 import Followers from "./Followers";
 import PrivateSection from "./PrivateSection";
+import Following from "./Following";
+import PublicSection from "./PublicSection";
 
 const MainComponent = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [userData, setUserData] = useState({});
   const [searching, setSearching] = useState(false);
   const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
   const showFollowers = async () => {
     if (userData.is_private) {
@@ -32,6 +35,30 @@ const MainComponent = () => {
       const { items } = response.data.data;
 
       setFollowers(items);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  const showFollowing = async () => {
+    if (userData.is_private) {
+      return;
+    }
+
+    const options = {
+      method: "GET",
+      url: "https://instagram-scraper-api2.p.rapidapi.com/v1/following",
+      params: { username_or_id_or_url: userData.username },
+      headers: {
+        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
+        "x-rapidapi-key": "2c0dd3e342mshc34c0e9867a1fd5p156a16jsn25eebd420dd8",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      const { items } = response.data.data;
+      console.log(items);
+      setFollowing(items);
     } catch (err) {
       console.log(err.message);
     }
@@ -108,9 +135,16 @@ const MainComponent = () => {
         data={userData}
         loading={searching}
         getFollowers={showFollowers}
+        getFollowing={showFollowing}
       />
-      {userData.is_private && <PrivateSection />}
+
+      {userData.is_private ? (
+        <PrivateSection />
+      ) : (
+        <PublicSection username={userData.username} />
+      )}
       {followers.length > 0 && <Followers followers={followers} />}
+      {following.length > 0 && <Following following={following} />}
     </div>
   );
 };

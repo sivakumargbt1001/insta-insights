@@ -2,7 +2,7 @@ import React from "react";
 import "./ProfileCard.css";
 import profileImg from "../assets/png-transparent-user-person-profile-instagram-ui-colored-icon.png";
 
-const ProfileCard = ({ data, loading, getFollowers }) => {
+const ProfileCard = ({ data, loading, getFollowers, getFollowing }) => {
   if (data.message) {
     return <div>{data.message}</div>;
   }
@@ -40,7 +40,7 @@ const ProfileCard = ({ data, loading, getFollowers }) => {
           <p>{data.follower_count}</p>
           <p>Followers</p>
         </div>
-        <div className="stat-item">
+        <div className="stat-item" onClick={getFollowing}>
           <p>{data.following_count}</p>
           <p>Following</p>
         </div>
