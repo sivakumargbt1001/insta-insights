@@ -1,0 +1,73 @@
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.profileHeader {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.profileHeader img {
+    height: 70px;
+    width: 70px;
+    object-fit: fill;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.profileHeader .profileName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profileHeader .profileName div {
+    display: flex;
+    gap: 10px;
+}
+
+.profileHeader .profileName div p {
+    font-weight: 700;
+    font-size: larger;
+}
+
+.profileHeader .profileName div .verified-badge {
+    display: flex;
+    align-items: center;
+    padding: 2px 5px;
+    font-size: 10px;
+    font-weight: 400;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+.profileHeader .profileName .username {
+    color: grey;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.profileStats {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+}
+
+.stat-item {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-item:first-child {
+    
+}
