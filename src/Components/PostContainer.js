@@ -14,7 +14,7 @@ const PostContainer = ({ posts }) => {
       params: { code_or_id_or_url: code },
       headers: {
         "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
+        "x-rapidapi-key": "f18acc8be5msh931a2482a5a68eep1f3d39jsn145d4510139b",
       },
     };
 
