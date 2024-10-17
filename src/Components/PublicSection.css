@@ -1,6 +1,6 @@
 .nav-container {
   border-top: 1px solid rgb(189, 189, 189);
-  padding-top: 10px;
+  /* padding-top: 10px; */
   width: 100%;
 }
 .nav {
@@ -10,9 +10,10 @@
   gap: 10px;
 }
 .nav-item {
-  padding: 10px;
+  padding: 20px;
   cursor: pointer;
   border: none;
+  list-style-type: none;
 }
 
 .nav-item-click {

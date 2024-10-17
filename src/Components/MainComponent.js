@@ -141,7 +141,7 @@ const MainComponent = () => {
       {userData.is_private ? (
         <PrivateSection />
       ) : (
-        <PublicSection data={userData} />
+        userData.username && <PublicSection data={userData} />
       )}
       {followers.length > 0 && <Followers followers={followers} />}
       {following.length > 0 && <Following following={following} />}
