@@ -1,123 +1,106 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import PostContainer from "./PostContainer";
 import "./PublicSection.css";
-const PublicSection = ({ data }) => {
+import axios from "axios";
+import Followers from "./Followers";
+import Following from "./Following";
+
+const PublicSection = ({
+  username,
+  followers,
+  following,
+  getFollowing,
+  getFollowers,
+}) => {
+  const [activeTab, setActiveTab] = useState("posts");
   const [posts, setPosts] = useState([]);
   const [reels, setReels] = useState([]);
-  const [active, setActive] = useState("posts");
-  useEffect(() => {
-    if (data && !data.is_private) {
-      showPosts();
-    }
-  }, [data]);
-  const showPosts = async () => {
-    if (data.is_private) {
-      return;
-    }
 
+  const showPosts = async () => {
     const options = {
       method: "GET",
       url: "https://instagram-scraper-api2.p.rapidapi.com/v1.2/posts",
-      params: { username_or_id_or_url: data.username },
+      params: { username_or_id_or_url: username },
       headers: {
         "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "2c0dd3e342mshc34c0e9867a1fd5p156a16jsn25eebd420dd8",
+        "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
       },
     };
-
     try {
       const response = await axios.request(options);
       const { items } = response.data.data;
-
       setPosts(items);
     } catch (err) {
       console.log(err.message);
     }
   };
-  const showReels = async () => {
-    if (data.is_private) {
-      return;
-    }
 
+  const showReels = async () => {
     const options = {
       method: "GET",
       url: "https://instagram-scraper-api2.p.rapidapi.com/v1.2/reels",
-      params: { username_or_id_or_url: data.username },
+      params: { username_or_id_or_url: username },
       headers: {
         "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "2c0dd3e342mshc34c0e9867a1fd5p156a16jsn25eebd420dd8",
+        "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
       },
     };
-
     try {
       const response = await axios.request(options);
       const { items } = response.data.data;
-
       setReels(items);
     } catch (err) {
       console.log(err.message);
     }
   };
   const handleReels = () => {
-    setActive("reels");
+    setActiveTab("reels");
     showReels();
   };
   const handlePosts = () => {
-    setActive("posts");
+    setActiveTab("posts");
     showPosts();
   };
+
+  showPosts();
+
+  const handleFollowing = () => {
+    setActiveTab("following");
+    getFollowing();
+  };
+
+  const handleFollowers = () => {
+    setActiveTab("followers");
+    getFollowers();
+  };
   return (
-    <>
+    <div className="public-container">
       <div className="nav-container">
         <ul className="nav">
-          <li
-            className={`nav-item ${active === "posts" ? "nav-item-click" : ""}`}
-            onClick={handlePosts}
-          >
+          <li className="nav-item" onClick={handlePosts}>
             Posts
           </li>
-          <li
-            className={`nav-item ${active === "reels" ? "nav-item-click" : ""}`}
-            onClick={handleReels}
-          >
+          <li className="nav-item" onClick={handleReels}>
             Reels
+          </li>
+          <li className="nav-item" onClick={handleFollowers}>
+            Followers
+          </li>
+          <li className="nav-item" onClick={handleFollowing}>
+            Following
           </li>
         </ul>
       </div>
 
-      <div>
-        {active === "posts" && (
-          <div>
-            {posts.length ? (
-              posts.map((post) => (
-                <div key={post.id}>
-                  `Like : ${post.like_count} and Comment : ${post.comment_count}{" "}
-                  `
-                </div>
-              ))
-            ) : (
-              <p>No posts available.</p>
-            )}
-          </div>
-        )}
-
-        {active === "reels" && (
-          <div>
-            {reels.length ? (
-              reels.map((reel) => (
-                <div key={reel.id}>
-                  `Like : ${reel.like_count} and Comment : ${reel.comment_count}{" "}
-                  `
-                </div>
-              ))
-            ) : (
-              <p>No reels available.</p>
-            )}
-          </div>
-        )}
-      </div>
-    </>
+      {activeTab === "posts" && <PostContainer posts={posts} />}
+      {activeTab === "reels" && <PostContainer posts={reels} />}
+      {activeTab === "followers" && followers.length > 0 && (
+        <Followers followers={followers} />
+      )}
+      {activeTab === "following" && following.length > 0 && (
+        <Following following={following} />
+      )}
+    </div>
   );
 };
-
 export default PublicSection;

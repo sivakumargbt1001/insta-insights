@@ -5,7 +5,6 @@ const Following = ({ following }) => {
   if (following.length === 0) {
     return <div>No following</div>;
   }
-
   return (
     <div className="followers-container">
       <p className="title">All following</p>
@@ -17,5 +16,4 @@ const Following = ({ following }) => {
     </div>
   );
 };
-
 export default Following;
