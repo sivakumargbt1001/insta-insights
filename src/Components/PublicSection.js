@@ -19,10 +19,10 @@ const PublicSection = ({
   const showPosts = async () => {
     const options = {
       method: "GET",
-      url: "https://instagram-scraper-api2.p.rapidapi.com/v1.2/posts",
-      params: { username_or_id_or_url: username },
+      url: "https://instagram-scraper-api3.p.rapidapi.com/user_posts",
+      params: { username_or_id: username },
       headers: {
-        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
+        "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
         "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
       },
     };
@@ -38,10 +38,10 @@ const PublicSection = ({
   const showReels = async () => {
     const options = {
       method: "GET",
-      url: "https://instagram-scraper-api2.p.rapidapi.com/v1.2/reels",
-      params: { username_or_id_or_url: username },
+      url: "https://instagram-scraper-api3.p.rapidapi.com/user_reels",
+      params: { username_or_id: username },
       headers: {
-        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
+        "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
         "x-rapidapi-key": "e605739e0emsh407eab8a403ca91p1e3829jsna8a556a56efe",
       },
     };
