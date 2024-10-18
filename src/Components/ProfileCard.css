@@ -1,85 +1,103 @@
 .profileContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    width: 100%;
-    background-color: antiquewhite;
-    border-radius: 10px;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  background-color: antiquewhite;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .profileHeader {
-    display: flex;
-    gap: 20px;
-    width: 100%;
+  display: flex;
+  gap: 20px;
 }
 
 .profileHeader img {
-    height: 70px;
-    width: 70px;
-    object-fit: contain;
-    border-radius: 50%;
-    background-color: black;
+  height: 70px;
+  width: 70px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: black;
 }
 
 .profileHeader .profileName {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .profileHeader .profileName div {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .profileHeader .profileName div p {
-    font-weight: 700;
-    font-size: larger;
+  font-weight: 700;
+  font-size: larger;
 }
 
 .profileHeader .profileName div .verified-badge {
-    display: flex;
-    align-items: center;
-    padding: 2px 5px;
-    font-size: 10px;
-    font-weight: 400;
-    border: solid black 1px;
-    border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-weight: 400;
+  border: solid black 1px;
+  border-radius: 5px;
 }
 
 .profileHeader .profileName .username {
-    color: grey;
-    font-weight: 500;
-    font-size: 14px;
+  color: grey;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .profileStats {
-    width: 100%;
-    padding: 0 20px;
-    display: flex;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
 }
 
 .stat-item {
-    padding: 20px 0;
-    width: 33%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
+  padding: 20px 0;
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 
 .stat-item p:first-child {
-    font-weight: 700;
-    font-size: large;
+  font-weight: 700;
+  font-size: large;
 }
 
 .stat-item p:last-child {
-    font-size: small;
+  font-size: small;
 }
 
 .profileContainer .bio {
-    width: 100%;
-    font-size: 14px;
+  width: 100%;
+  font-size: 14px;
+}
+.ProfileHead {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.insightsBtn {
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid rgb(172, 172, 172);
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.insightsBtn:hover {
+  background-color: rgb(230, 230, 230);
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import "./ProfileCard.css";
-import profileImg from "../assets/png-transparent-user-person-profile-instagram-ui-colored-icon.png";
 
-const ProfileCard = ({ data, loading, getFollowers, getFollowing }) => {
+const ProfileCard = ({ data, loading, handleInsights }) => {
   if (data.message) {
     return <div>{data.message}</div>;
   }
@@ -17,15 +16,22 @@ const ProfileCard = ({ data, loading, getFollowers, getFollowing }) => {
 
   return (
     <div className="profileContainer">
-      <div className="profileHeader">
-        <img src={profileImg} alt="Profile" />
-        <div className="profileName">
-          <div>
-            <p>{data.full_name ? data.full_name : "no username"}</p>
-            {data.is_verified && <div className="verified-badge">Verified</div>}
+      <div className="ProfileHead">
+        <div className="profileHeader">
+          <img src={data.profile_pic_url_hd} alt="Profile" />
+          <div className="profileName">
+            <div>
+              <p>{data.full_name ? data.full_name : "no username"}</p>
+              {data.is_verified && (
+                <div className="verified-badge">Verified</div>
+              )}
+            </div>
+            <p className="username">@{data.username}</p>
           </div>
-          <p className="username">@{data.username}</p>
         </div>
+        <button className="insightsBtn" onClick={handleInsights}>
+          Insights
+        </button>
       </div>
 
       <div className="profileStats">
@@ -37,7 +43,7 @@ const ProfileCard = ({ data, loading, getFollowers, getFollowing }) => {
           <p>{data.follower_count}</p>
           <p>Followers</p>
         </div>
-        <div className="stat-item" onClick={getFollowing}>
+        <div className="stat-item">
           <p>{data.following_count}</p>
           <p>Following</p>
         </div>
