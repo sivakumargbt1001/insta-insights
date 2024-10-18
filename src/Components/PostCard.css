@@ -9,15 +9,42 @@
     border: solid black 1px;
 }
 
-.post-container .type {
+
+.post-card img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+.post-card .type {
     font-weight: 500;
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-.post-container .stats {
-    display: flex;
+.post-card .stats {
+    background-color: rgba(0, 0, 0, 0.627);
+    color: white;
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
     font-weight: 500;
+    z-index: 1;
+}
+
+.post-card .stats .count-icon{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-card:hover .stats{
+    display: flex;
 }

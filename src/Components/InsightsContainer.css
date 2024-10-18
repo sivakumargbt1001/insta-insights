@@ -1,0 +1,41 @@
+.tabs-container{
+  width: 100%;
+}
+
+.insights-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.insights-header {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.insights-header span {
+  cursor: pointer;
+}
+
+.insights-container .heading {
+  line-height: 24px;
+  font-weight: 600;
+  font-size: large;
+}
+
+.insights-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

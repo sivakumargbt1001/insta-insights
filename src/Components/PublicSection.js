@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PostContainer from "./PostContainer";
 import "./PublicSection.css";
 import axios from "axios";
 import Followers from "./Followers";
 import Following from "./Following";
+import ReelsContainer from "./ReelsContainer";
 
 const PublicSection = ({
   username,
@@ -16,14 +17,14 @@ const PublicSection = ({
   const [posts, setPosts] = useState([]);
   const [reels, setReels] = useState([]);
 
-  const showPosts = async () => {
+  const showPosts = useCallback(async () => {
     const options = {
       method: "GET",
-      url: "https://instagram-scraper-api2.p.rapidapi.com/v1.2/posts",
-      params: { username_or_id_or_url: username },
+      url: "https://instagram-scraper-api3.p.rapidapi.com/user_posts",
+      params: { username_or_id: username },
       headers: {
-        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "f18acc8be5msh931a2482a5a68eep1f3d39jsn145d4510139b",
+        "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
+        "x-rapidapi-key": process.env.REACT_APP_API,
       },
     };
     try {
@@ -33,16 +34,16 @@ const PublicSection = ({
     } catch (err) {
       console.log(err.message);
     }
-  };
+  }, [username]);
 
   const showReels = async () => {
     const options = {
       method: "GET",
-      url: "https://instagram-scraper-api2.p.rapidapi.com/v1.2/reels",
-      params: { username_or_id_or_url: username },
+      url: "https://instagram-scraper-api3.p.rapidapi.com/user_reels",
+      params: { username_or_id: username },
       headers: {
-        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "f18acc8be5msh931a2482a5a68eep1f3d39jsn145d4510139b",
+        "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
+        "x-rapidapi-key": process.env.REACT_APP_API,
       },
     };
     try {
@@ -62,7 +63,9 @@ const PublicSection = ({
     showPosts();
   };
 
-  showPosts();
+  useEffect(() => {
+    showPosts();
+  }, [showPosts]);
 
   const handleFollowing = () => {
     setActiveTab("following");
@@ -93,7 +96,7 @@ const PublicSection = ({
       </div>
 
       {activeTab === "posts" && <PostContainer posts={posts} />}
-      {activeTab === "reels" && <PostContainer posts={reels} />}
+      {activeTab === "reels" && <ReelsContainer reels={reels} />}
       {activeTab === "followers" && followers.length > 0 && (
         <Followers followers={followers} />
       )}

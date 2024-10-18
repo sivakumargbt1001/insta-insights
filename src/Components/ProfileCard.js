@@ -2,7 +2,7 @@ import React from "react";
 import "./ProfileCard.css";
 import profileImg from "../assets/png-transparent-user-person-profile-instagram-ui-colored-icon.png";
 
-const ProfileCard = ({ data, loading }) => {
+const ProfileCard = ({ data, loading, handleInsights }) => {
   if (data.message) {
     return <div>{data.message}</div>;
   }
@@ -17,15 +17,24 @@ const ProfileCard = ({ data, loading }) => {
 
   return (
     <div className="profileContainer">
-      <div className="profileHeader">
-        <img src={profileImg} alt="Profile" />
-        <div className="profileName">
-          <div>
-            <p>{data.full_name ? data.full_name : "no username"}</p>
-            {data.is_verified && <div className="verified-badge">Verified</div>}
+      <div className="ProfileHead">
+        <div className="profileHeader">
+          <img src={profileImg} alt="Profile" />
+          <div className="profileName">
+            <div>
+              <p>{data.full_name ? data.full_name : "no username"}</p>
+              {data.is_verified && (
+                <div className="verified-badge">Verified</div>
+              )}
+            </div>
+            <p className="username">@{data.username}</p>
           </div>
-          <p className="username">@{data.username}</p>
         </div>
+        {!data.is_private && (
+          <button className="insightsBtn" onClick={handleInsights}>
+            Insights
+          </button>
+        )}
       </div>
 
       <div className="profileStats">

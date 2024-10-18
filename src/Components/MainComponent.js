@@ -5,6 +5,7 @@ import SearchField from "./SearchField";
 import ProfileCard from "./ProfileCard";
 import PrivateSection from "./PrivateSection";
 import PublicSection from "./PublicSection";
+import InsightsContainer from "./InsightsContainer";
 
 const MainComponent = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +13,8 @@ const MainComponent = () => {
   const [searching, setSearching] = useState(false);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [showInsights, setShowInsights] = useState(false);
+  const [showSection, setShowSection] = useState(true);
 
   const showFollowers = async () => {
     if (userData.is_private) {
@@ -20,19 +23,19 @@ const MainComponent = () => {
 
     const options = {
       method: "GET",
-      url: "https://instagram-scraper-api2.p.rapidapi.com/v1/followers",
-      params: { username_or_id_or_url: userData.username },
+      url: "https://instagram-scraper-api3.p.rapidapi.com/user_followers",
+      params: { username_or_id: userData.username },
       headers: {
-        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "f18acc8be5msh931a2482a5a68eep1f3d39jsn145d4510139b",
+        "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
+        "x-rapidapi-key": process.env.REACT_APP_API,
       },
     };
 
     try {
       const response = await axios.request(options);
-      const { items } = response.data.data;
+      const { users } = response.data.data;
 
-      setFollowers(items);
+      setFollowers(users);
     } catch (err) {
       console.log(err.message);
     }
@@ -44,18 +47,17 @@ const MainComponent = () => {
     }
     const options = {
       method: "GET",
-      url: "https://instagram-scraper-api2.p.rapidapi.com/v1/following",
-      params: { username_or_id_or_url: userData.username },
+      url: "https://instagram-scraper-api3.p.rapidapi.com/user_following",
+      params: { username_or_id: userData.username },
       headers: {
-        "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-        "x-rapidapi-key": "f18acc8be5msh931a2482a5a68eep1f3d39jsn145d4510139b",
+        "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
+        "x-rapidapi-key": process.env.REACT_APP_API,
       },
     };
     try {
       const response = await axios.request(options);
-      const { items } = response.data.data;
-      console.log(items);
-      setFollowing(items);
+      const { users } = response.data.data;
+      setFollowing(users);
     } catch (err) {
       console.log(err.message);
     }
@@ -69,11 +71,11 @@ const MainComponent = () => {
 
       const options = {
         method: "GET",
-        url: "https://instagram-scraper-api2.p.rapidapi.com/v1/info",
-        params: { username_or_id_or_url: searchTerm },
+        url: "https://instagram-scraper-api3.p.rapidapi.com/user_info",
+        params: { username_or_id: searchTerm },
         headers: {
-          "x-rapidapi-host": "instagram-scraper-api2.p.rapidapi.com",
-          "x-rapidapi-key": "f18acc8be5msh931a2482a5a68eep1f3d39jsn145d4510139b",
+          "x-rapidapi-host": "instagram-scraper-api3.p.rapidapi.com",
+          "x-rapidapi-key": process.env.REACT_APP_API,
         },
       };
 
@@ -88,6 +90,7 @@ const MainComponent = () => {
           biography,
           is_verified,
           is_private,
+          profile_pic_url,
         } = response.data.data;
 
         setSearching(false);
@@ -101,6 +104,7 @@ const MainComponent = () => {
           biography,
           is_verified,
           is_private,
+          profile_pic_url,
         });
       } catch (err) {
         setSearching(false);
@@ -119,6 +123,11 @@ const MainComponent = () => {
     }
   };
 
+  const toggleInsights = () => {
+    setShowInsights(!showInsights);
+    setShowSection(!showSection);
+  };
+
   return (
     <div className="mainContainer">
       <h1>Instagram Insights</h1>
@@ -127,15 +136,25 @@ const MainComponent = () => {
         change={setSearchTerm}
         submit={handleSearch}
       />
-      <ProfileCard data={userData} loading={searching} />
-      {userData?.is_private && <PrivateSection />}
-      {userData?.is_private === false && (
+      <ProfileCard
+        data={userData}
+        loading={searching}
+        handleInsights={toggleInsights}
+      />
+      {showSection && userData?.is_private && <PrivateSection />}
+      {showSection && userData?.is_private === false && (
         <PublicSection
           username={userData.username}
           followers={followers}
           following={following}
           getFollowers={showFollowers}
           getFollowing={showFollowing}
+        />
+      )}
+      {showInsights && (
+        <InsightsContainer
+          username={userData.username}
+          toggle={toggleInsights}
         />
       )}
     </div>

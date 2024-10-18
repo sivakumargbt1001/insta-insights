@@ -1,0 +1,18 @@
+.dropdown-container{
+    width: 100%;
+}
+
+select {
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: solid black 1px;
+  background-color: #434242;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+option {
+  padding: 10px;
+}
